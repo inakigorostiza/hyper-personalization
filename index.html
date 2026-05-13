@@ -655,8 +655,9 @@
                         email: email
                     });
 
-                    // Identify user
+                    // Identify user with email as distinct_id
                     posthog.identify(email, {
+                        email: email,
                         name: name,
                         country: country,
                         signup_timestamp: new Date().toISOString(),
