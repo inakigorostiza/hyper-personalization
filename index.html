@@ -126,29 +126,37 @@
         }
 
         .btn-primary {
-            background: var(--color-blue);
+            background: linear-gradient(135deg, var(--color-blue), #0052cc);
             color: var(--color-white);
+            padding: 0.9rem 2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
-            background: #0052cc;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(135deg, #0052cc, #003d99);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 102, 255, 0.5);
         }
 
         .btn-primary:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--color-blue);
-            border: 2px solid var(--color-blue);
+            color: var(--color-cyan);
+            border: 2px solid var(--color-cyan);
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background: var(--color-blue);
-            color: var(--color-white);
+            background: var(--color-cyan);
+            color: var(--color-bg);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         /* Toast Notification */
@@ -293,8 +301,10 @@
         }
 
         .card.selected .btn-secondary {
-            background: var(--color-blue);
+            background: linear-gradient(135deg, var(--color-blue), var(--color-cyan));
             color: var(--color-white);
+            border-color: transparent;
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
         }
 
         .card-checkmark {
