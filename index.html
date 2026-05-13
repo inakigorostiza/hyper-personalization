@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IE-Nergy | Energy for Your Ambitions</title>
     <script>
-        !function(t,e){var n=e.createElement("script");n.src="https://eu.posthog.com/array.js",n.async=!0,n.onload=function(){window.posthog.init("phc_AdsKcbii3uWQWFhGTnwmEGVyt5dsGRXVkHDBQTaqXnLk",{api_host:"https://eu.posthog.com",session_recording:{enabled:!0,sample_rate:1},capture_pageview:!0})},e.head.appendChild(n)}(window,document);
+        !function(t,e){var n=e.createElement("script");n.src="https://eu-assets.i.posthog.com/array.js",n.async=!0,n.onload=function(){window.posthog.init("phc_AdsKcbii3uWQWFhGTnwmEGVyt5dsGRXVkHDBQTaqXnLk",{api_host:"https://eu.i.posthog.com",session_recording:{enabled:!0,sample_rate:1},capture_pageview:!0})},e.head.appendChild(n)}(window,document);
     </script>
     <style>
         :root {
@@ -667,6 +667,12 @@
                 setTimeout(() => {
                     successMsg.classList.add('show');
                     showToast(`✓ Thanks ${name}! Check your email for your free can code.`);
+                    if (typeof posthog !== 'undefined') {
+                        posthog.capture('free_can_claimed', {
+                            name: name,
+                            country: country
+                        });
+                    }
 
                     setTimeout(() => {
                         this.reset();
@@ -675,6 +681,14 @@
                         submitBtn.textContent = 'Claim your free can';
                     }, 2000);
                 }, 600);
+            } else {
+                if (typeof posthog !== 'undefined') {
+                    posthog.capture('form_validation_error', {
+                        missing_name: !name,
+                        missing_country: !country,
+                        missing_email: !email
+                    });
+                }
             }
         });
 
@@ -686,6 +700,25 @@
                 });
             }
             document.querySelector('.signup').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Section viewed tracking (funnel entry points)
+        var sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && typeof posthog !== 'undefined') {
+                    var section = entry.target.className.split(' ')[0];
+                    if (section === 'use-cases') {
+                        posthog.capture('use_cases_section_viewed');
+                    } else if (section === 'signup') {
+                        posthog.capture('signup_section_viewed');
+                    }
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.use-cases, .signup').forEach(function(el) {
+            sectionObserver.observe(el);
         });
 
         // Card selection
