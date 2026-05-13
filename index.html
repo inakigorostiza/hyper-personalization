@@ -49,35 +49,27 @@
             align-items: center;
             padding: var(--spacing-lg);
             text-align: center;
-            background: linear-gradient(135deg, var(--color-bg) 0%, #1a0a3e 50%, var(--color-bg) 100%);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 50%, #7c3aed 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
             max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .hero h1 {
             font-size: 3rem;
             font-weight: 800;
             margin-bottom: var(--spacing-md);
-            letter-spacing: -0.02em;
-            line-height: 1.2;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         @media (max-width: 640px) {
@@ -88,8 +80,9 @@
 
         .hero-subtitle {
             font-size: 1.25rem;
-            color: var(--color-text-muted);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: var(--spacing-lg);
+            font-weight: 500;
         }
 
         @media (max-width: 640px) {
@@ -103,13 +96,13 @@
             width: 100%;
             height: auto;
             margin-top: var(--spacing-xl);
-            filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.3));
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
             animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
         @media (max-width: 640px) {
