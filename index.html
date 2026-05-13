@@ -487,9 +487,23 @@
                     ✓ Check your email for your free can code!
                 </div>
                 <input
+                    id="signup-name"
+                    type="text"
+                    placeholder="Your name"
+                    required
+                    autocomplete="name"
+                >
+                <input
+                    id="signup-country"
+                    type="text"
+                    placeholder="Your country"
+                    required
+                    autocomplete="country-name"
+                >
+                <input
                     id="signup-email"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Your email"
                     required
                     autocomplete="email"
                 >
@@ -520,18 +534,20 @@
         // Form submission
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const country = document.getElementById('signup-country').value;
             const email = document.getElementById('signup-email').value;
             const submitBtn = document.getElementById('signup-submit');
             const successMsg = document.getElementById('form-success');
 
-            if (email) {
+            if (name && country && email) {
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sending...';
 
                 // Simulate form processing
                 setTimeout(() => {
                     successMsg.classList.add('show');
-                    showToast(`✓ Check your email, ${email.split('@')[0]}!`);
+                    showToast(`✓ Thanks ${name}! Check your email for your free can code.`);
 
                     setTimeout(() => {
                         this.reset();
