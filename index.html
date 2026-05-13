@@ -92,23 +92,36 @@
         }
 
         .hero-image {
-            max-width: 300px;
+            position: absolute;
+            max-width: 800px;
             width: 100%;
             height: auto;
-            margin-top: var(--spacing-xl);
-            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
-            animation: float 3s ease-in-out infinite;
+            opacity: 0.25;
+            z-index: 0;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-50%, calc(-50% - 20px)); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-image {
+                max-width: 500px;
+                opacity: 0.2;
+            }
         }
 
         @media (max-width: 640px) {
             .hero-image {
-                max-width: 200px;
-                margin-top: var(--spacing-lg);
+                max-width: 350px;
+                opacity: 0.15;
             }
         }
 
