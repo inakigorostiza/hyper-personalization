@@ -649,6 +649,11 @@
 
         // Hero CTA
         document.getElementById('cta-hero').addEventListener('click', function() {
+            if (typeof posthog !== 'undefined') {
+                posthog.capture('cta_clicked', {
+                    cta_location: 'hero'
+                });
+            }
             document.querySelector('.signup').scrollIntoView({ behavior: 'smooth' });
         });
 
