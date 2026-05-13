@@ -619,6 +619,20 @@
             }, duration);
         }
 
+        // Track form field focus
+        ['signup-name', 'signup-country', 'signup-email'].forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('focus', function() {
+                    if (typeof posthog !== 'undefined') {
+                        posthog.capture('form_field_focused', {
+                            field_name: fieldId.replace('signup-', '')
+                        });
+                    }
+                });
+            }
+        });
+
         // Form submission
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
