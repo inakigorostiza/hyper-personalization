@@ -663,6 +663,9 @@
             button.addEventListener('click', function(e) {
                 e.preventDefault();
 
+                // Get the card type from the ID
+                const cardType = card.id.replace('card-', '');
+
                 // Remove selected state from all cards
                 document.querySelectorAll('.card').forEach(c => {
                     c.classList.remove('selected');
@@ -671,10 +674,19 @@
                 // Add selected state to clicked card
                 card.classList.add('selected');
 
-                // Get the card type from the ID
-                const cardType = card.id.replace('card-', '');
-                const cardTitle = card.querySelector('.card-title').textContent;
+                // Track card selection
+                if (typeof posthog !== 'undefined') {
+                    posthog.capture('card_selected', {
+                        card_type: cardType
+                    });
 
+                    posthog.capture('cta_clicked', {
+                        cta_location: 'card',
+                        card_type: cardType
+                    });
+                }
+
+                const cardTitle = card.querySelector('.card-title').textContent;
                 showToast(`✓ You picked ${cardTitle}. Claim your free can!`);
 
                 setTimeout(() => {
