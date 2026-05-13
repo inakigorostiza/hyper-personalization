@@ -643,6 +643,23 @@
             const successMsg = document.getElementById('form-success');
 
             if (name && country && email) {
+                // Track form submission
+                if (typeof posthog !== 'undefined') {
+                    posthog.capture('form_submitted', {
+                        name: name,
+                        country: country,
+                        email: email
+                    });
+
+                    // Identify user
+                    posthog.identify(email, {
+                        name: name,
+                        country: country,
+                        signup_timestamp: new Date().toISOString(),
+                        signup_source: 'landing_page'
+                    });
+                }
+
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sending...';
 
